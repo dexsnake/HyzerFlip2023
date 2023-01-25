@@ -1,6 +1,6 @@
 {
   "name": "HyzerFlip",
-  "displayName": "HyzerFlip",
+  "displayName": "Hyzer Flip",
   "expo": {
     "name": "HyzerFlip",
     "slug": "HyzerFlip",
@@ -11,13 +11,15 @@
     "splash": {
       "image": "./assets/images/splash-logo-all.png",
       "resizeMode": "contain",
-      "backgroundColor": "#191015"
+      "backgroundColor": "#2563EB"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
     "jsEngine": "hermes",
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "android": {
       "icon": "./assets/images/app-icon-android-legacy.png",
       "package": "com.hyzerflip.app",
@@ -28,7 +30,7 @@
       "splash": {
         "image": "./assets/images/splash-logo-android-universal.png",
         "resizeMode": "contain",
-        "backgroundColor": "#191015"
+        "backgroundColor": "#2563EB"
       }
     },
     "ios": {
@@ -39,7 +41,7 @@
         "image": "./assets/images/splash-logo-ios-mobile.png",
         "tabletImage": "./assets/images/splash-logo-ios-tablet.png",
         "resizeMode": "contain",
-        "backgroundColor": "#191015"
+        "backgroundColor": "#2563EB"
       }
     },
     "web": {
@@ -47,7 +49,7 @@
       "splash": {
         "image": "./assets/images/splash-logo-web.png",
         "resizeMode": "contain",
-        "backgroundColor": "#191015"
+        "backgroundColor": "#2563EB"
       }
     }
   }
