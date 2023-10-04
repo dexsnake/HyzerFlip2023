@@ -1,23 +1,23 @@
 import { StackScreenProps } from '@react-navigation/stack'
 import { observer } from 'mobx-react-lite'
 import React, { FC, useContext, useState, useEffect } from 'react'
-import { Text, View, Image, ActivityIndicator } from 'react-native'
-import { Button, Header, Screen } from '../../components'
+import { Text, View, Image } from 'react-native'
+import { Button, Screen } from '../../components'
 import { AuthStackParamsList } from '../../navigators/stacks/Auth'
 import { useSignupState } from '../../state/signup-state'
 import { dismissBrowser, openBrowserAsync } from 'expo-web-browser'
 import axios from 'axios'
 import { ProfileContext } from '../../context/Profile'
-import { AuthContext } from '../../context/Auth'
 import { supabase } from '../../clients/supabase'
 import { EyeSlashIcon, LinkIcon } from 'react-native-heroicons/outline'
 import LoadingOverlay from '../../components/modals/loading-overlay'
+import useAuth from '../../hooks/useAuth'
 
 const stripe = require('../../../assets/images/stripe.png')
 const API_BASE_URL = 'http://172.30.0.177:3000/api'
 
 export const StripeInitScreen: FC<StackScreenProps<AuthStackParamsList, 'stripe-init'>> = observer(({ navigation, route }) => {
-	const { session } = useContext(AuthContext)
+	const { session } = useAuth()
 	const { profile } = useContext(ProfileContext)
 	const goBack = () => navigation.goBack()
 	const goHome = () => navigation.navigate('home')

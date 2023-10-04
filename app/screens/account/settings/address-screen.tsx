@@ -1,4 +1,4 @@
-import { useState } from '@hookstate/core'
+import { useHookstate } from '@hookstate/core'
 import { StackScreenProps } from '@react-navigation/stack'
 import { AddressSheet } from '@stripe/stripe-react-native'
 import React, { FC } from 'react'
@@ -16,7 +16,7 @@ export const NewAddressScreen: FC<StackScreenProps<SettingsStackParamsList, 'add
 
 	const [visible, setVisible] = React.useState(false)
 
-	const store = useState(addressStore)
+	const store = useHookstate(addressStore)
 
 	return (
 		<View className="flex-1">

@@ -1,11 +1,11 @@
 /* eslint-disable react/display-name */
 import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet'
-import { useState } from '@hookstate/core'
+import { useHookstate } from '@hookstate/core'
 import { StackScreenProps } from '@react-navigation/stack'
 import { ApiResponse } from 'apisauce'
 import { observer } from 'mobx-react-lite'
 import React, { FC, useCallback, useContext, useMemo, useRef } from 'react'
-import { TextStyle, View, ViewStyle, Text, Pressable, ScrollView, Alert } from 'react-native'
+import { View, Text, Pressable, ScrollView, Alert } from 'react-native'
 import { Button, Header, Screen } from '../../components'
 import ListingSuccessModal from '../../components/modals/listing-success-modal'
 import LoadingOverlay from '../../components/modals/loading-overlay'
@@ -15,13 +15,13 @@ import Details from '../../components/sell/DetailsSelection'
 import Images from '../../components/sell/ImageSelection'
 import Price from '../../components/sell/PriceSelection'
 import Shipping from '../../components/sell/ShippingSelection'
-import { AuthContext } from '../../context/Auth'
 import { ProfileContext } from '../../context/Profile'
 import { SellStackParamsList } from '../../navigators/stacks/Sell'
 import { api } from '../../services/api'
 import { clearStore, sellStore } from '../../state/sell-state'
 import addNewListing from '../../utils/supabase/addNewListing'
 import validateStore from '../../utils/sell/validate'
+import useAuth from '../../hooks/useAuth'
 const API_BASE_URL = 'http://172.30.0.177:3000/api'
 
 export const SellScreen: FC<StackScreenProps<SellStackParamsList, 'sell-screen'>> = observer(({ navigation }) => {
@@ -30,9 +30,9 @@ export const SellScreen: FC<StackScreenProps<SellStackParamsList, 'sell-screen'>
 		navigation.goBack()
 	}
 
-	const { session } = useContext(AuthContext)
+	const { session } = useAuth()
 	const { profile } = useContext(ProfileContext)
-	const store = useState(sellStore)
+	const store = useHookstate(sellStore)
 	const [loading, setLoading] = React.useState(false)
 	const [modalComponent, setModalComponent] = React.useState<'processing-fee' | 'platform-fee'>('processing-fee')
 	const [isSuccessModalOpen, setIsSuccessModalOpen] = React.useState(false)
@@ -40,10 +40,6 @@ export const SellScreen: FC<StackScreenProps<SellStackParamsList, 'sell-screen'>
 
 	const handleModalOpen = () => setIsSuccessModalOpen(true)
 	const handleModalClose = () => setIsSuccessModalOpen(false)
-
-	const FULL: ViewStyle = { flex: 1 }
-
-	const LIST_BUTTON_TEXT: TextStyle = { color: '#fff', fontWeight: '500', letterSpacing: 1 }
 
 	async function handlePost() {
 		try {
@@ -92,9 +88,9 @@ export const SellScreen: FC<StackScreenProps<SellStackParamsList, 'sell-screen'>
 	}
 
 	return (
-		<View style={FULL}>
+		<View className="flex-1">
 			<Screen backgroundColor="#fff">
-				<Header title="Sell an item" leftIcon="caretLeft" onLeftPress={goBack} rightText="List" onRightPress={handlePost} />
+				<Header title="Sell an item" leftIcon="back" onLeftPress={goBack} rightText="List" onRightPress={handlePost} />
 				<ScrollView className="px-4 pt-4 pb-10 bg-gray-100">
 					<Images />
 					<Description />

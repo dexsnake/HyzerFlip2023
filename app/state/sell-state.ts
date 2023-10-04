@@ -1,8 +1,8 @@
-import bottomSheet from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheet'
-import { createState } from '@hookstate/core'
+import { hookstate, ImmutableObject } from '@hookstate/core'
 import { Image } from 'react-native-image-crop-picker'
 import { Listing } from '../../types'
 
+export type SellStoreValue = ImmutableObject<ImmutableObject<SellState>>
 export interface SellState {
 	editMode?: boolean
 	id?: string
@@ -34,7 +34,7 @@ export const initialSellStoreState: SellState = {
 	shipping_cost: '',
 	price: ''
 }
-export const sellStore = createState(initialSellStoreState)
+export const sellStore = hookstate(initialSellStoreState)
 
 export function initStore(listing: Listing) {
 	sellStore.set({

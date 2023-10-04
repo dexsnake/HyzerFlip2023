@@ -24,7 +24,7 @@ export type AccountStackParamsList = {
 	'account-screen': undefined
 	'edit-account-screen': undefined
 	'edit-profile-screen': undefined
-	home: undefined
+	'home-stack': undefined
 	'settings-stack-screen': undefined
 	selling: undefined
 	buying: undefined

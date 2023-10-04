@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Alert, Platform, Pressable, Text, View } from 'react-native'
 import { Button, TextField } from '..'
 import { navigate } from '../../navigators'
@@ -6,35 +6,29 @@ import { supabase } from '../../clients/supabase'
 import { continueWithApple } from '../../utils/auth/continueWithApple'
 import { continueWithGoogle } from '../../utils/auth/continueWithGoogle'
 import LoadingOverlay from '../modals/loading-overlay'
-import { useStores } from '../../models'
-import { observer } from 'mobx-react-lite'
 import { Reactotron } from '../../services/reactotron/reactotronClient'
 
-export const LoginForm = observer(function LoginForm() {
+export default function SignupForm() {
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
 	const [loading, setLoading] = useState(false)
 	const [errorMessage, setErrorMessage] = useState('')
-
-	const {
-		authenticationStore: { authEmail, authPassword, setAuthEmail, setAuthPassword, setToken, validationErrors }
-	} = useStores()
 
 	// Call the the continueWithApple function then navigate to the home screen
 	async function handleAppleButtonPress() {
 		try {
 			await continueWithApple()
-			navigate('home')
+			navigate('home-stack')
 		} catch (error: any) {
 			console.log(error)
 		}
-		// const { data, error } = await supabase.auth.signInWithOAuth({ provider: 'apple' })
-		// console.log({ data, error })
 	}
 
 	// Call the the continueWithGoogle function then navigate to the home screen
 	async function handleGoogleButtonPress() {
 		try {
 			await continueWithGoogle()
-			navigate('home')
+			navigate('home-stack')
 		} catch (error: any) {
 			console.log(error)
 		}
@@ -42,20 +36,18 @@ export const LoginForm = observer(function LoginForm() {
 
 	async function handleLogin() {
 		try {
-			if (!authEmail) throw new Error('Please enter your email address.')
-			if (!authPassword) throw new Error('Please enter your password.')
+			if (!email) throw new Error('Please enter your email address.')
+			if (!password) throw new Error('Please enter your password.')
 			setLoading(true)
-			const { data, error } = await supabase.auth.signInWithPassword({ email: authEmail, password: authPassword })
+			const { error } = await supabase.auth.signInWithPassword({ email, password })
 			if (error) throw new Error(error.message)
-			Reactotron.log(data.session.access_token)
-			setToken(data.session.access_token)
-			setAuthPassword('')
-			setAuthEmail('')
+			setPassword('')
+			setEmail('')
 			navigate('home-stack')
+			setLoading(false)
 		} catch (error: any) {
 			setErrorMessage(error.message)
 			Alert.alert(error.message)
-		} finally {
 			setLoading(false)
 		}
 	}
@@ -64,8 +56,8 @@ export const LoginForm = observer(function LoginForm() {
 		<View>
 			<View className="mb-4">
 				<TextField
-					value={authEmail}
-					onChangeText={setAuthEmail}
+					value={email}
+					onChangeText={setEmail}
 					label="Email address"
 					autoCorrect={false}
 					autoFocus
@@ -77,8 +69,8 @@ export const LoginForm = observer(function LoginForm() {
 			</View>
 			<View className="mb-4">
 				<TextField
-					value={authPassword}
-					onChangeText={setAuthPassword}
+					value={password}
+					onChangeText={setPassword}
 					autoCorrect={false}
 					secureTextEntry
 					keyboardType="default"
@@ -106,4 +98,4 @@ export const LoginForm = observer(function LoginForm() {
 			<LoadingOverlay show={loading} />
 		</View>
 	)
-})
+}

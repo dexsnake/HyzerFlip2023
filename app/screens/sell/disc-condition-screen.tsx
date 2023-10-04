@@ -4,13 +4,13 @@ import React, { FC } from 'react'
 import { TextStyle, View, ViewStyle, Text, Pressable, ScrollView } from 'react-native'
 import { Header, Screen } from '../../components'
 import { SellStackParamsList } from '../../navigators/stacks/Sell'
-import { useState } from '@hookstate/core'
+import { useHookstate } from '@hookstate/core'
 import { sellStore } from '../../state/sell-state'
 import DiscConditions from '../../constants/DiscConditions'
 import { CheckIcon } from 'react-native-heroicons/outline'
 
 export const DiscConditionScreen: FC<StackScreenProps<SellStackParamsList, 'disc-condition'>> = observer(({ navigation }) => {
-	const { condition } = useState(sellStore)
+	const { condition } = useHookstate(sellStore)
 	const goBack = () => navigation.goBack()
 
 	const [containerWidth, setContainerWidth] = React.useState(0)

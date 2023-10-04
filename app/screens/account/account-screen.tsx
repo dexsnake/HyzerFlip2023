@@ -12,10 +12,11 @@ import { supabase } from '../../clients/supabase'
 import { ProfileContext } from '../../context/Profile'
 import { api } from '../../services/api'
 import Stripe from 'stripe'
-import OneSignal from 'react-native-onesignal'
+import { observer } from 'mobx-react-lite'
 
-export const AccountScreen: FC<StackScreenProps<AccountStackParamsList, 'account-screen'>> = ({ navigation }) => {
+export const AccountScreen: FC<StackScreenProps<AccountStackParamsList, 'account-screen'>> = observer(({ navigation }) => {
 	const { clearProfile, profile } = useContext(ProfileContext)
+
 	// Button Actions
 	const openHowItWorksLink = () => openBrowserAsync('http://172.30.0.177:3000/how-it-works')
 	const openHelpCenterLink = () => openBrowserAsync('http://172.30.0.177:3000/help-center')
@@ -37,11 +38,11 @@ export const AccountScreen: FC<StackScreenProps<AccountStackParamsList, 'account
 			{ text: 'No' },
 			{
 				text: 'Yes',
-				onPress: () =>
-					supabase.auth.signOut().then(() => {
-						clearProfile()
-						navigation.navigate('home')
-					})
+				onPress: () => {
+					supabase.auth.signOut()
+					clearProfile()
+					navigation.navigate('home-stack')
+				}
 			}
 		])
 	}
@@ -49,7 +50,7 @@ export const AccountScreen: FC<StackScreenProps<AccountStackParamsList, 'account
 	return (
 		<View className="flex-1">
 			<Screen statusBarStyle="dark" preset="scroll">
-				<Header rightIcon="bell" border={false} onRightPress={openHelpCenterLink} />
+				<Header rightIcon="help" border={false} onRightPress={openHelpCenterLink} />
 				<ProfileHeader navigation={navigation} />
 				<ProfileStats />
 				<View style={BUTTON_CONTAINER}>
@@ -70,4 +71,4 @@ export const AccountScreen: FC<StackScreenProps<AccountStackParamsList, 'account
 			</Screen>
 		</View>
 	)
-}
+})

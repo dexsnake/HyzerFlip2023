@@ -4,14 +4,14 @@ import React, { FC } from 'react'
 import { TextStyle, View, ViewStyle, Text, Pressable, ScrollView } from 'react-native'
 import { Header, Screen } from '../../components'
 import { SellStackParamsList } from '../../navigators/stacks/Sell'
-import { useState } from '@hookstate/core'
+import { useHookstate } from '@hookstate/core'
 import { sellStore } from '../../state/sell-state'
 import DiscColors from '../../constants/DiscColors'
 import { LinearGradient } from 'expo-linear-gradient'
 import { CheckIcon } from 'react-native-heroicons/outline'
 
 export const DiscColorScreen: FC<StackScreenProps<SellStackParamsList, 'disc-color'>> = observer(({ navigation }) => {
-	const { color } = useState(sellStore)
+	const { color } = useHookstate(sellStore)
 	const goBack = () => navigation.goBack()
 	const FULL: ViewStyle = { flex: 1 }
 	const HEADER: TextStyle = {

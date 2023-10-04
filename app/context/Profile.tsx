@@ -1,9 +1,9 @@
-import React, { useState, useEffect, createContext, ReactNode, useContext } from 'react'
+import React, { useState, useEffect, createContext, ReactNode } from 'react'
 import { supabase } from '../clients/supabase'
-import { AuthContext } from './Auth'
 import { Profile, Listing } from '../../types'
 import { Alert } from 'react-native'
 import { SaleWithListing } from '../hooks/usePurchase'
+import useAuth from '../hooks/useAuth'
 
 interface ProfileContextInterface {
 	profile: Profile | null
@@ -20,7 +20,7 @@ interface Props {
 export const ProfileContext = createContext<ProfileContextInterface>({ profile: null, likes: [], sales: [], purchases: [], clearProfile: () => null })
 
 export const ProfileProvider = ({ children }: Props) => {
-	const { session } = useContext(AuthContext)
+	const { session } = useAuth()
 	const [profile, setProfile] = useState<Profile | null>(null)
 	const [likes, setLikes] = useState<Listing[]>([])
 	const [sales, setSales] = useState<SaleWithListing[]>([])

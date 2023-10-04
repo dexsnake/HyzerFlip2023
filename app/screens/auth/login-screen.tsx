@@ -1,12 +1,11 @@
 import { StackScreenProps } from '@react-navigation/stack'
-import { observer } from 'mobx-react-lite'
 import React, { FC } from 'react'
 import { View } from 'react-native'
 import { Header, Screen } from '../../components'
-import { LoginForm } from '../../components/forms/LoginForm'
+import LoginForm from '../../components/forms/LoginForm'
 import { AuthStackParamsList } from '../../navigators/stacks/Auth'
 
-export const LoginScreen: FC<StackScreenProps<AuthStackParamsList, 'login'>> = observer(({ navigation }) => {
+export const LoginScreen: FC<StackScreenProps<AuthStackParamsList, 'login-screen'>> = ({ navigation }) => {
 	const goBack = () => navigation.goBack()
 	const goToForgotPassword = () => navigation.navigate('forgot-password')
 
@@ -20,4 +19,4 @@ export const LoginScreen: FC<StackScreenProps<AuthStackParamsList, 'login'>> = o
 			</Screen>
 		</View>
 	)
-})
+}

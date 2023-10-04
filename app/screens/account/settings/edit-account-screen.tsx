@@ -1,19 +1,19 @@
 import { StackScreenProps } from '@react-navigation/stack'
-import React, { FC, useContext, useState } from 'react'
+import React, { FC, useState } from 'react'
 import { Alert, View } from 'react-native'
 import { Button, Header, Screen, TextField } from '../../../components'
 import LoadingOverlay from '../../../components/modals/loading-overlay'
-import { AuthContext } from '../../../context/Auth'
 import { SettingsStackParamsList } from '../../../navigators/stacks/Settings'
 import { supabase } from '../../../clients/supabase'
 import { delay } from '../../../utils/delay'
+import useAuth from '../../../hooks/useAuth'
 
 export const EditAccountScreen: FC<StackScreenProps<SettingsStackParamsList, 'edit-account-screen'>> = ({ navigation }) => {
 	const goBack = () => {
 		navigation.goBack()
 	}
 
-	const { session } = useContext(AuthContext)
+	const { session } = useAuth()
 
 	const [password, setPassword] = useState('')
 	const [confirmPassword, setConfirmPassword] = useState('')

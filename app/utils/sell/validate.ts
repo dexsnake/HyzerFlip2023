@@ -1,8 +1,8 @@
-import { SellState } from '../../state/sell-state'
+import { SellStoreValue } from '../../state/sell-state'
 import validate from 'validate.js'
 import Toast from 'react-native-toast-message'
 
-export default function validateStore(store: Partial<SellState>) {
+export default function validateStore(store: SellStoreValue) {
 	const rules = {
 		images: {
 			presence: { message: '📸 Please include atleast one image', allowEmpty: false }

@@ -19,6 +19,7 @@ import {
 import { AuthContext } from '../../context/Auth'
 import { Reactotron } from '../../services/reactotron/reactotronClient'
 import { useStores } from '../../models'
+import useAuth from '../../hooks/useAuth'
 
 type MainTabParamList = {
 	'home-stack': undefined
@@ -55,13 +56,11 @@ function getTabOptions(routeName: string, badgeCount?: number) {
 }
 
 function checkForAuth(routeName: string) {
-	const {
-		authenticationStore: { isAuthenticated }
-	} = useStores()
+	const { session } = useAuth()
 	return ({ navigation }) => ({
 		tabPress: (e: EventArg<'tabPress', true>) => {
 			e.preventDefault()
-			if (isAuthenticated) navigation.navigate(routeName)
+			if (session) navigation.navigate(routeName)
 			else navigation.navigate('auth')
 		}
 	})

@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { View, Text, Pressable, Image } from 'react-native'
 import { CheckoutStackParamsList } from '../../navigators/stacks/Checkout'
 import { StackNavigationProp } from '@react-navigation/stack'
-import { useState } from '@hookstate/core'
+import { useHookstate } from '@hookstate/core'
 import { checkoutStore } from '../../state/checkout-state'
 import CreditCardDisplay from '../account/settings/credit-card-display'
 import useCustomer from '../../hooks/useCustomer'
@@ -16,7 +16,7 @@ interface Props {
 }
 
 export default function Billing({ navigation }: Props) {
-	const { payment, applePay } = useState(checkoutStore)
+	const { payment, applePay } = useHookstate(checkoutStore)
 	const { profile } = useContext(ProfileContext)
 	const { customer } = useCustomer(profile.customer_id)
 

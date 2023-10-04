@@ -1,23 +1,22 @@
-import { useState } from '@hookstate/core'
-import { useNavigation } from '@react-navigation/native'
+import { useHookstate } from '@hookstate/core'
 import { formatDistanceToNow } from 'date-fns'
-import React, { useContext } from 'react'
+import React from 'react'
 import { Text, TextStyle, View, ViewStyle } from 'react-native'
 import { Button } from '..'
-import { AuthContext } from '../../context/Auth'
 import { navigate } from '../../navigators'
 import { checkoutStore } from '../../state/checkout-state'
 import { Listing } from '../../../types'
 import Likes from './Likes'
+import useAuth from '../../hooks/useAuth'
 
 interface Props {
 	item: Listing
 }
 
 export default function DetailsSection({ item }: Props) {
-	const { listing } = useState(checkoutStore)
+	const { listing } = useHookstate(checkoutStore)
 
-	const { session } = useContext(AuthContext)
+	const { session } = useAuth()
 
 	function handleBuyNow() {
 		listing.set(item)

@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import { useState } from '@hookstate/core'
+import { useHookstate } from '@hookstate/core'
 import { StackScreenProps } from '@react-navigation/stack'
 import { ApiResponse } from 'apisauce'
 import React, { FC, useEffect } from 'react'
@@ -33,7 +33,7 @@ export const EditListingScreen: FC<StackScreenProps<EditListingStackParamsList, 
 		])
 	}
 
-	const store = useState(sellStore)
+	const store = useHookstate(sellStore)
 	const [loading, setLoading] = React.useState(false)
 
 	useEffect(() => {

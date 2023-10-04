@@ -15,7 +15,6 @@ import { useFonts } from 'expo-font'
 import React from 'react'
 import { initialWindowMetrics, SafeAreaProvider } from 'react-native-safe-area-context'
 import * as Linking from 'expo-linking'
-import { useInitialRootStore } from './models'
 import { AppNavigator, useNavigationPersistence } from './navigators'
 import { ErrorBoundary } from './screens/ErrorScreen/ErrorBoundary'
 import * as storage from './utils/storage'
@@ -23,6 +22,9 @@ import { customFontsToLoad } from './theme'
 import { setupReactotron } from './services/reactotron'
 import Config from './config'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import { AuthProvider } from './context/Auth'
+import { StripeProvider } from '@stripe/stripe-react-native'
+import { ProfileProvider } from './context/Profile'
 
 // Set up Reactotron, which is a free desktop app for inspecting and debugging
 // React Native apps. Learn more here: https://github.com/infinitered/reactotron
@@ -75,15 +77,15 @@ function App(props: AppProps) {
 
 	const [areFontsLoaded] = useFonts(customFontsToLoad)
 
-	const { rehydrated } = useInitialRootStore(() => {
-		// This runs after the root store has been initialized and rehydrated.
+	// const { rehydrated } = useInitialRootStore(() => {
+	// This runs after the root store has been initialized and rehydrated.
 
-		// If your initialization scripts run very fast, it's good to show the splash screen for just a bit longer to prevent flicker.
-		// Slightly delaying splash screen hiding for better UX; can be customized or removed as needed,
-		// Note: (vanilla Android) The splash-screen will not appear if you launch your app via the terminal or Android Studio. Kill the app and launch it normally by tapping on the launcher icon. https://stackoverflow.com/a/69831106
-		// Note: (vanilla iOS) You might notice the splash-screen logo change size. This happens in debug/development mode. Try building the app for release.
-		setTimeout(hideSplashScreen, 500)
-	})
+	// If your initialization scripts run very fast, it's good to show the splash screen for just a bit longer to prevent flicker.
+	// Slightly delaying splash screen hiding for better UX; can be customized or removed as needed,
+	// Note: (vanilla Android) The splash-screen will not appear if you launch your app via the terminal or Android Studio. Kill the app and launch it normally by tapping on the launcher icon. https://stackoverflow.com/a/69831106
+	// Note: (vanilla iOS) You might notice the splash-screen logo change size. This happens in debug/development mode. Try building the app for release.
+	setTimeout(hideSplashScreen, 500)
+	// })
 
 	// Before we show the app, we have to wait for our state to be ready.
 	// In the meantime, don't render anything. This will be the background
@@ -91,7 +93,7 @@ function App(props: AppProps) {
 	// In iOS: application:didFinishLaunchingWithOptions:
 	// In Android: https://stackoverflow.com/a/45838109/204044
 	// You can replace with your own loading component if you wish.
-	if (!rehydrated || !isNavigationStateRestored || !areFontsLoaded) return null
+	if (!isNavigationStateRestored || !areFontsLoaded) return null
 
 	const linking = {
 		prefixes: [prefix],
@@ -103,7 +105,16 @@ function App(props: AppProps) {
 		<GestureHandlerRootView style={{ flex: 1 }}>
 			<SafeAreaProvider initialMetrics={initialWindowMetrics}>
 				<ErrorBoundary catchErrors={Config.catchErrors}>
-					<AppNavigator linking={linking} initialState={initialNavigationState} onStateChange={onNavigationStateChange} />
+					<AuthProvider>
+						<ProfileProvider>
+							<StripeProvider
+								publishableKey="pk_test_51I3DRQLWxRWmKsskvcBvXCbJj0Uymk2YSvxVrTESQ38vAelHkg2ZHYgRrSBRe1vKo0KIL42nrl3pVNrnAygQIBRz005W3wBHJE"
+								merchantIdentifier="merchant.com.hyzerflip.app"
+							>
+								<AppNavigator linking={linking} initialState={initialNavigationState} onStateChange={onNavigationStateChange} />
+							</StripeProvider>
+						</ProfileProvider>
+					</AuthProvider>
 				</ErrorBoundary>
 			</SafeAreaProvider>
 		</GestureHandlerRootView>

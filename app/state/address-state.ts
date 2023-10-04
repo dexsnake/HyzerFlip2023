@@ -1,4 +1,4 @@
-import { createState } from '@hookstate/core'
+import { hookstate } from '@hookstate/core'
 
 export interface AddressState {
 	name: string
@@ -21,7 +21,7 @@ export const initialAddressStoreState: AddressState = {
 	country: '',
 	action: 'add'
 }
-export const addressStore = createState(initialAddressStoreState)
+export const addressStore = hookstate(initialAddressStoreState)
 
 export function clearAddressStore() {
 	addressStore.set({

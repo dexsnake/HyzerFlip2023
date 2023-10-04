@@ -45,7 +45,7 @@ export const MessageScreen: FC<StackScreenProps<MessagesStackParamsList, 'messag
 	const goBack = () => navigation.goBack()
 
 	return (
-		<Screen backgroundColor="#fff">
+		<Screen preset="fixed" safeAreaEdges={['top', 'bottom']} backgroundColor="#fff">
 			<Header onLeftPress={goBack} leftIcon="back" title={user2 ? user2.username : ''} />
 			{user1 && listing && user1Purchases.filter((purchase) => purchase.listing_id === listing.id).length > 0 && <PurchasedBanner />}
 			{listing && (
@@ -72,7 +72,6 @@ export const MessageScreen: FC<StackScreenProps<MessagesStackParamsList, 'messag
 					avatar: user1.image_url
 				}}
 			/>
-			<View style={{ height: insets.bottom }}></View>
 		</Screen>
 	)
 }

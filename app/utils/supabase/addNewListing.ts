@@ -1,7 +1,7 @@
-import { SellState } from '../../state/sell-state'
+import { SellStoreValue } from '../../state/sell-state'
 import { supabase } from '../../clients/supabase'
 
-export default async function addNewListing(store: Partial<SellState>, user_id: string, imageUrls: string[]) {
+export default async function addNewListing(store: SellStoreValue, user_id: string, imageUrls: string[]) {
 	try {
 		const { error } = await supabase.from('listings').insert({
 			...store,

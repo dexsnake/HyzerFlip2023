@@ -13,7 +13,7 @@ export type AuthStackParamsList = {
 	'social-signup': undefined
 	'email-signup': undefined
 	'choose-password': undefined
-	login: undefined
+	'login-screen': undefined
 	'forgot-password': undefined
 	'stripe-init': { from: 'setup' | 'account' }
 	home: undefined
@@ -28,7 +28,7 @@ export default function AuthStack() {
 			<Stack.Screen name="email-signup" component={EmailSignupScreen} />
 			<Stack.Screen name="social-signup" component={SocialSignupScreen} />
 			<Stack.Screen name="choose-password" component={ChoosePasswordScreen} />
-			<Stack.Screen name="login" component={LoginScreen} />
+			<Stack.Screen name="login-screen" component={LoginScreen} />
 			<Stack.Screen name="forgot-password" component={ForgotPasswordScreen} />
 			<Stack.Screen name="stripe-init" component={StripeInitScreen} />
 		</Stack.Navigator>

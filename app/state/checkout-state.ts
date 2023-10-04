@@ -1,4 +1,4 @@
-import { createState } from '@hookstate/core'
+import { hookstate } from '@hookstate/core'
 import Stripe from 'stripe'
 import { Listing } from '../../types'
 
@@ -15,7 +15,7 @@ export const initialCheckoutStoreState: CheckoutState = {
 	payment: null,
 	applePay: false
 }
-export const checkoutStore = createState(initialCheckoutStoreState)
+export const checkoutStore = hookstate(initialCheckoutStoreState)
 
 export function clearCheckoutStore() {
 	checkoutStore.set({

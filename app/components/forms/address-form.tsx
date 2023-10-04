@@ -1,4 +1,4 @@
-import { useState } from '@hookstate/core'
+import { useHookstate } from '@hookstate/core'
 import { StackNavigationProp } from '@react-navigation/stack'
 import axios from 'axios'
 import React, { useContext } from 'react'
@@ -16,7 +16,7 @@ interface Props {
 
 export default function AddressFrom({ navigation }: Props) {
 	const { profile } = useContext(ProfileContext)
-	const store = useState(addressStore)
+	const store = useHookstate(addressStore)
 	const [shippingChecked, setShippingChecked] = React.useState(true)
 	const [billingChecked, setBillingChecked] = React.useState(true)
 	const [loading, setLoading] = React.useState(false)

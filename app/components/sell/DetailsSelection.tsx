@@ -1,4 +1,4 @@
-import { useState } from '@hookstate/core'
+import { useHookstate } from '@hookstate/core'
 import React from 'react'
 import { Pressable, Text, TextStyle, View, ViewStyle } from 'react-native'
 import { ChevronRightIcon } from 'react-native-heroicons/outline'
@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function DetailsSelection({ navigation }: Props) {
-	const { type, brand, condition, color } = useState(sellStore)
+	const { type, brand, condition, color } = useHookstate(sellStore)
 
 	const goToTypeScreen = () => navigation.navigate('disc-type')
 	const goToBrandScreen = () => navigation.navigate('disc-brand')

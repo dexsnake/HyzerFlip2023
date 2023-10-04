@@ -14,7 +14,7 @@ export const MessagesScreen: FC<StackScreenProps<MessagesStackParamsList, 'messa
 	const { chats, loading, error } = useChats(profile.id)
 
 	return (
-		<Screen backgroundColor="#fff">
+		<Screen preset="fixed" safeAreaEdges={['top', 'bottom']} backgroundColor="#fff">
 			<Header title="Messages" />
 			{loading && <ActivityIndicator />}
 			{error && <Text className="text-red-500">{error}</Text>}

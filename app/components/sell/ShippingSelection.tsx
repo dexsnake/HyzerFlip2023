@@ -1,10 +1,10 @@
-import { useState } from '@hookstate/core'
+import { useHookstate } from '@hookstate/core'
 import React, { useRef } from 'react'
 import { Pressable, Text, TextInput, TextStyle, View, ViewStyle } from 'react-native'
 import { sellStore } from '../../state/sell-state'
 
 export default function ShippingSelection() {
-	const { ships_from, free_shipping, shipping_cost } = useState(sellStore)
+	const { ships_from, free_shipping, shipping_cost } = useHookstate(sellStore)
 
 	const shippingCostInput = useRef(null)
 

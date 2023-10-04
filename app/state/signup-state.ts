@@ -1,4 +1,4 @@
-import { createState, useState } from '@hookstate/core'
+import { hookstate } from '@hookstate/core'
 interface signupStateInterface {
 	firstName: string
 	lastName: string
@@ -18,10 +18,10 @@ const initialSignupState: signupStateInterface = {
 	password2: 'test1234',
 	signupType: 'email'
 }
-const signupState = createState(initialSignupState)
+const signupState = hookstate(initialSignupState)
 
 export const useSignupState = () => {
-	const signup = useState(signupState)
+	const signup = signupState
 	return {
 		set: (key: keyof typeof initialSignupState, value: any) => signup[key].set(value),
 		get: () => signup.value,

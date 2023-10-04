@@ -1,4 +1,4 @@
-import { useState } from '@hookstate/core'
+import { useHookstate } from '@hookstate/core'
 import React, { useRef } from 'react'
 import { Pressable, Text, TextInput, TextStyle, View, ViewStyle, StyleSheet } from 'react-native'
 import { QuestionMarkCircleIcon } from 'react-native-heroicons/outline'
@@ -13,7 +13,7 @@ interface Props {
 }
 
 export default function PriceSelection({ openModal }: Props) {
-	const { price, shipping_cost, free_shipping } = useState(sellStore)
+	const { price, shipping_cost, free_shipping } = useHookstate(sellStore)
 
 	const platformFee = calculatePlatformFee(price.value)
 	const processingFee = calculateProcessingFee(price.value)

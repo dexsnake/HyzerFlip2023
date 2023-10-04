@@ -5,7 +5,7 @@ import { Header, Screen } from '../../../components'
 import { ProfileContext } from '../../../context/Profile'
 import { useApplePay, useStripe } from '@stripe/stripe-react-native'
 import { checkoutStore } from '../../../state/checkout-state'
-import { useState } from '@hookstate/core'
+import { useHookstate } from '@hookstate/core'
 import CreditCardDisplay from '../../../components/account/settings/credit-card-display'
 import { Swipeable, RectButton } from 'react-native-gesture-handler'
 import LoadingOverlay from '../../../components/modals/loading-overlay'
@@ -21,7 +21,7 @@ export const MyPaymentMethodsScreen: FC<StackScreenProps<SettingsStackParamsList
 		navigation.goBack()
 	}
 
-	const { payment, applePay } = useState(checkoutStore)
+	const { payment, applePay } = useHookstate(checkoutStore)
 
 	const { profile } = useContext(ProfileContext)
 

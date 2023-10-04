@@ -2,12 +2,12 @@ import React, { useEffect } from 'react'
 import { TextStyle, View, Text, ViewStyle, Pressable, Image as RNImage, ImageStyle, ActionSheetIOS } from 'react-native'
 import ImagePicker, { ImageOrVideo, Image } from 'react-native-image-crop-picker'
 import { sellStore } from '../../state/sell-state'
-import { useState } from '@hookstate/core'
+import { useHookstate } from '@hookstate/core'
 import { CameraIcon } from 'react-native-heroicons/outline'
 
 export default function ImageSelection() {
 	const [containerWidth, setContainerWidth] = React.useState(0)
-	const { images, editMode, newImages } = useState(sellStore)
+	const { images, editMode, newImages } = useHookstate(sellStore)
 	const [editIndex, setEditIndex] = React.useState(-1)
 
 	const MAX_IMAGES = 4

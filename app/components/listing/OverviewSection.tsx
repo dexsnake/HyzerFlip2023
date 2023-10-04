@@ -1,16 +1,16 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { ActionSheetIOS, Pressable, Text, TextStyle, View, ViewStyle } from 'react-native'
 import { Listing } from '../../../types'
 import discConditions from '../../constants/DiscConditions'
-import { AuthContext } from '../../context/Auth'
 import { ArrowRightOnRectangleIcon, FlagIcon } from 'react-native-heroicons/outline'
+import useAuth from '../../hooks/useAuth'
 
 interface Props {
 	item: Listing
 }
 
 export default function OverviewSection({ item }: Props) {
-	const { session } = useContext(AuthContext)
+	const { session } = useAuth()
 
 	const CONTAINER: ViewStyle = { backgroundColor: '#fff', paddingHorizontal: 16, marginTop: 10 }
 	const SECTION: ViewStyle = { borderBottomColor: '#d1d5db', borderBottomWidth: 0.75 }

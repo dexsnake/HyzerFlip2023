@@ -1,10 +1,10 @@
-import { useState } from '@hookstate/core'
+import { useHookstate } from '@hookstate/core'
 import React from 'react'
 import { Image, View, Text } from 'react-native'
 import { checkoutStore } from '../../state/checkout-state'
 
 export default function ItemOverview() {
-	const { listing } = useState(checkoutStore)
+	const { listing } = useHookstate(checkoutStore)
 	const item = listing.value
 
 	return (

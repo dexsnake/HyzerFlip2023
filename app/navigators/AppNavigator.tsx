@@ -8,7 +8,6 @@ import {
 	DarkTheme,
 	DefaultTheme,
 	NavigationContainer,
-	NavigatorScreenParams // @demo remove-current-line
 } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { CardStyleInterpolators, StackScreenProps } from '@react-navigation/stack'
@@ -16,7 +15,6 @@ import { observer } from 'mobx-react-lite'
 import React from 'react'
 import { useColorScheme } from 'react-native'
 import Config from '../config'
-import { DemoTabParamList } from './DemoNavigator' // @demo remove-current-line
 import { navigationRef, useBackButtonHandler } from './navigationUtilities'
 import AuthStack from './stacks/Auth'
 import BottomTabs from './tabs/Main'
@@ -36,8 +34,6 @@ import BottomTabs from './tabs/Main'
  */
 export type AppStackParamList = {
 	Welcome: undefined
-	Login: undefined // @demo remove-current-line
-	Demo: NavigatorScreenParams<DemoTabParamList> // @demo remove-current-line
 	// 🔥 Your screens go here
 	root: undefined
 	auth: undefined

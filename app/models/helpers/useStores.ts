@@ -1,7 +1,7 @@
-import { createContext, useContext, useEffect, useState } from "react"
-import { setReactotronRootStore } from "../../services/reactotron"
-import { RootStore, RootStoreModel } from "../RootStore"
-import { setupRootStore } from "./setupRootStore"
+import { createContext, useContext, useEffect, useState } from 'react'
+import { setReactotronRootStore } from '../../services/reactotron'
+import { RootStore, RootStoreModel } from '../RootStore'
+import { setupRootStore } from './setupRootStore'
 
 /**
  * Create the initial (empty) global RootStore instance here.
@@ -49,32 +49,32 @@ export const useStores = () => useContext(RootStoreContext)
  * and then lets the app know that everything is ready to go.
  */
 export const useInitialRootStore = (callback: () => void | Promise<void>) => {
-  const rootStore = useStores()
-  const [rehydrated, setRehydrated] = useState(false)
+	const rootStore = useStores()
+	const [rehydrated, setRehydrated] = useState(false)
 
-  // Kick off initial async loading actions, like loading fonts and rehydrating RootStore
-  useEffect(() => {
-    let _unsubscribe
-    ;(async () => {
-      // set up the RootStore (returns the state restored from AsyncStorage)
-      const { restoredState, unsubscribe } = await setupRootStore(rootStore)
-      _unsubscribe = unsubscribe
+	// Kick off initial async loading actions, like loading fonts and rehydrating RootStore
+	useEffect(() => {
+		let _unsubscribe
+		;(async () => {
+			// set up the RootStore (returns the state restored from AsyncStorage)
+			const { restoredState, unsubscribe } = await setupRootStore(rootStore)
+			_unsubscribe = unsubscribe
 
-      // reactotron integration with the MST root store (DEV only)
-      setReactotronRootStore(rootStore, restoredState)
+			// reactotron integration with the MST root store (DEV only)
+			setReactotronRootStore(rootStore, restoredState)
 
-      // let the app know we've finished rehydrating
-      setRehydrated(true)
+			// let the app know we've finished rehydrating
+			setRehydrated(true)
 
-      // invoke the callback, if provided
-      if (callback) callback()
-    })()
+			// invoke the callback, if provided
+			if (callback) callback()
+		})()
 
-    return () => {
-      // cleanup
-      if (_unsubscribe) _unsubscribe()
-    }
-  }, [])
+		return () => {
+			// cleanup
+			if (_unsubscribe) _unsubscribe()
+		}
+	}, [])
 
-  return { rootStore, rehydrated }
+	return { rootStore, rehydrated }
 }

@@ -47,7 +47,7 @@ export const AddTrackingScreen: FC<StackScreenProps<AccountStackParamsList, 'add
 	return (
 		<View className="flex-1">
 			<Screen keyboardShouldPersistTaps="always" backgroundColor="#fff">
-				<Header leftIcon="x" border={false} onLeftPress={goBack} />
+				<Header leftIcon="close" border={false} onLeftPress={goBack} />
 				<View className="items-center px-4">
 					<View className="items-center mb-2">
 						<Image className="h-40 w-40" resizeMode="contain" source={shippingBox} />

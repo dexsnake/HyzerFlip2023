@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import { ActivityIndicator, View, ViewStyle, Text, Animated, StyleSheet, TextStyle, Pressable } from 'react-native'
 import useListing from '../../hooks/useListing'
 import { StackScreenProps } from '@react-navigation/stack'
@@ -6,7 +6,6 @@ import { ListingStackParamsList } from '../../navigators/stacks/Listing'
 import ImageSlider from '../../components/listing/ImageSlider'
 import DetailsSection from '../../components/listing/DetailsSection'
 import { addListingView } from '../../utils/supabase/addListingView'
-import { AuthContext } from '../../context/Auth'
 import OverviewSection from '../../components/listing/OverviewSection'
 import SellerSection from '../../components/listing/SellerSection'
 import ShippingSection from '../../components/listing/ShippingSection'
@@ -14,11 +13,12 @@ import { screenWidth } from '../../utils/screen-dimensions'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useIsFocused } from '@react-navigation/native'
 import { ChevronLeftIcon } from 'react-native-heroicons/outline'
+import useAuth from '../../hooks/useAuth'
 
 export const ListingScreen: FC<StackScreenProps<ListingStackParamsList, 'listing-screen'>> = ({ navigation, route }) => {
 	const goBack = () => navigation.goBack()
 	const focused = useIsFocused()
-	const { session } = useContext(AuthContext)
+	const { session } = useAuth()
 	const { listing, loading, error } = useListing(route.params.id, focused)
 	const insets = useSafeAreaInsets()
 

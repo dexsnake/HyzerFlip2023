@@ -15,7 +15,7 @@ export const SignupScreen: FC<StackScreenProps<AuthStackParamsList, 'signup'>> =
 		clear()
 		navigation.goBack()
 	}
-	const goToLogin = () => navigation.navigate('login')
+	const goToLogin = () => navigation.navigate('login-screen')
 	const openTermsOfService = () => openBrowserAsync('https://hyzerflip.app/terms-of-service')
 	const openPrivacyPolicy = () => openBrowserAsync('https://hyzerflip.app/privacy-policy')
 

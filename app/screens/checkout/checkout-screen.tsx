@@ -1,4 +1,4 @@
-import { useState } from '@hookstate/core'
+import { useHookstate } from '@hookstate/core'
 import { StackScreenProps } from '@react-navigation/stack'
 import { ApiResponse } from 'apisauce'
 import React, { FC, useContext } from 'react'
@@ -29,7 +29,7 @@ export const CheckoutScreen: FC<StackScreenProps<CheckoutStackParamsList, 'check
 	const isFocused = useIsFocused()
 
 	// Store
-	const { listing, payment, applePay } = useState(checkoutStore)
+	const { listing, payment, applePay } = useHookstate(checkoutStore)
 
 	// Context
 	const { profile } = useContext(ProfileContext)

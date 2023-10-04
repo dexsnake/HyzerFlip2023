@@ -6,13 +6,13 @@ import { Header, Screen } from '../../components'
 import { SellStackParamsList } from '../../navigators/stacks/Sell'
 import { colors, spacing } from '../../theme'
 import DiscBrands from '../../constants/DiscBrands'
-import { useState } from '@hookstate/core'
+import { useHookstate } from '@hookstate/core'
 import { sellStore } from '../../state/sell-state'
 import { ScrollView } from 'react-native-gesture-handler'
 import { CheckIcon } from 'react-native-heroicons/outline'
 
 export const DiscBrandScreen: FC<StackScreenProps<SellStackParamsList, 'disc-brand'>> = observer(({ navigation }) => {
-	const { brand } = useState(sellStore)
+	const { brand } = useHookstate(sellStore)
 
 	const goBack = () => navigation.goBack()
 

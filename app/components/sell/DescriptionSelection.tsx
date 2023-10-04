@@ -1,10 +1,10 @@
-import { useState } from '@hookstate/core'
+import { useHookstate } from '@hookstate/core'
 import React from 'react'
 import { Text, TextInput, TextStyle, View, ViewStyle } from 'react-native'
 import { sellStore } from '../../state/sell-state'
 
 export default function DescriptionSelection() {
-	const { title, description } = useState(sellStore)
+	const { title, description } = useHookstate(sellStore)
 
 	const CONTAINER: ViewStyle = { marginTop: 15 }
 	const DESCRIPTION: TextStyle = { fontWeight: '500', marginBottom: 15 }

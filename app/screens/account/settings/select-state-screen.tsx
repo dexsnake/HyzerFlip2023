@@ -4,7 +4,7 @@ import { TextStyle, View, ViewStyle, Text, Pressable } from 'react-native'
 import { Header, Screen } from '../../../components'
 import { colors, spacing } from '../../../theme'
 import { SettingsStackParamsList } from '../../../navigators/stacks/Settings'
-import { useState } from '@hookstate/core'
+import { useHookstate } from '@hookstate/core'
 import { addressStore } from '../../../state/address-state'
 import { CheckIcon } from 'react-native-heroicons/outline'
 
@@ -13,7 +13,7 @@ export const SelectStateScreen: FC<StackScreenProps<SettingsStackParamsList, 'se
 		navigation.goBack()
 	}
 
-	const store = useState(addressStore)
+	const store = useHookstate(addressStore)
 
 	const states = [
 		'Alabama',
